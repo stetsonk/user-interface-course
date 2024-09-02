@@ -1,2 +1,71 @@
-/* This is an empty style sheet in CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+}
 
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #00ffffc4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-section, .image-section, .quote-section, .journal-section, .sleep-section, .mood-section, .submit-section {
+    margin-bottom: 20px;
+}
+
+#quote {
+    border-radius: 25px;
+    background: rgb(0, 194, 253);
+    padding: 20px; 
+    width: fit-content;
+    height: fit-content;
+    font-style: italic;
+}
+
+input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="file"] {
+    margin-top: 10px;
+}
+
+#daily-image img {
+    max-width: 40%;
+    max-height: 40%;
+    margin-top: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}

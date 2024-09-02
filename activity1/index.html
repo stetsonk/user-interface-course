@@ -2,18 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My UI</title>
+    <title>Daily Journal</title>
     
     <!-- The following line references an external css file -->
     <!-- It defines style rules for your page, and elements in your page -->
     <link href="css/style.css" rel="stylesheet">
-    
 </head>
-<body>
-    Main content can be added here.  
 
-    <!-- Load external JS files -->
-    <!-- This is where you will do most of the 'work' for your applications -->
-    <script src="js/main.js"></script>
+<body>
+    <header>
+        <h1>Daily Journal</h1>
+        <p id="date-time">9/2/2024, 12:35:23 PM</p>
+    </header>
+
+    <main>
+        <!-- User's Name -->
+        <div class="user-section">
+            <label>Name:</label>
+            <input type="text" id="user-name" placeholder="Enter your name">
+        </div>
+
+        <!-- Inspirational Quote -->
+        <div class="quote-section">
+            <label>Inspirational Quote of the Day:</label>
+            <p id="quote">"Believe you can and you're halfway there." - Theodore Roosevelt</p>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="image-section">
+            <label for="image-upload">Daily Image:</label>
+            <div id="daily-image">
+                <img src="img/pork2.jpg">
+            </div>
+        </div>
+
+        <!-- Journal Entry -->
+        <div class="journal-section">
+            <label for="journal-entry">Journal Entry:</label>
+            <textarea id="journal-entry" rows="5" placeholder="Write your thoughts here..."></textarea>
+        </div>
+
+        <!-- Sleep Hours -->
+        <div class="sleep-section">
+            <label for="sleep-hours">Hours of Sleep:</label>
+            <input type="number" id="sleep-hours" min="0" max="24">
+        </div>
+
+        <!-- Mood Checkboxes -->
+        <div class="mood-section">
+            <p>How did you feel today?</p>
+            <label><input type="checkbox" value="energetic">
+                Energetic
+                <svg width="50" height="50">
+                    <rect x="25" y="25" width="25" height="25" fill="yellow" />
+                </svg>
+            </label>
+            <label><input type="checkbox" value="anxious">
+                Anxious
+                <svg width="50" height="50">
+                    <rect x="25" y="25" width="25" height="25" fill="black" />
+                </svg>
+            </label>
+            <label><input type="checkbox" value="motivated">
+                Motivated
+                <svg width="50" height="50">
+                    <rect x="25" y="25" width="25" height="25" fill="blue" />
+                </svg>
+            </label>
+            <label><input type="checkbox" value="happy">
+                Happy
+                <svg width="50" height="50">
+                    <rect x="25" y="25" width="25" height="25" fill="green" />
+                </svg>
+            </label>
+            <label><input type="checkbox" value="stressed">
+                Stressed
+                <svg width="50" height="50">
+                    <rect x="25" y="25" width="25" height="25" fill="red" />
+                </svg>
+            </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="submit-section">
+            <button id="submit-button">Save Entry</button>
+        </div>
+    </main>
 </body>
 </html>
