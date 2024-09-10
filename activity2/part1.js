@@ -19,3 +19,10 @@ let stringLength = (myStr) => myStr.length < 10 ? "short" : "long";
 
 // If a is greater than b, print a to console else print b to console
 
+// 3
+const numbers = [1, 2, 3, 4, 5];
+
+// Using map to create a new array with squared values
+const squaredNumbers = numbers.map(function(number) {
+  return number * number;
+});
