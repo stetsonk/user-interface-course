@@ -1,224 +1,202 @@
 <script>
-  import { onMount } from "svelte";
-
-  // User data array with dummy data for previous days
-  let userEntries = [
-      {
-          date: '2024-09-01',
-          name: 'Stetson',
-          journal: 'Had a productive day at work. Feeling good!',
-          sleepHours: 8,
-          moods: ['energetic', 'motivated'],
-          imageUrl: ''
-      },
-      {
-          date: '2024-09-02',
-          name: 'Stetson',
-          journal: 'Struggled with focus. Maybe too much coffee.',
-          sleepHours: 5,
-          moods: ['anxious', 'tired'],
-          imageUrl: ''
-      },
-      {
-          date: '2024-09-03',
-          name: 'Stetson',
-          journal: 'Great workout today. Feeling strong.',
-          sleepHours: 7,
-          moods: ['motivated', 'happy'],
-          imageUrl: ''
-      }
-  ];
-
-  // Data for the current day's entry
-  let name = "";
-  let journal = "";
-  let sleepHours = 0;
-  let moods = [];
-  let imageUrl = "";
-
-  let averageSleep = 0;
-  let moodCounts = {
-      energetic: 0,
-      anxious: 0,
-      motivated: 0,
-      happy: 0,
-      stressed: 0,
-      tired: 0
-  };
-
-  // SVG color determination for sleep quality
-  let sleepColor = 'white';
-
-  // Run on page load
-  onMount(() => {
-      computeAndDisplayStats();
-      updateDateTime();
-  });
-
-  function updateCurrentDayEntry() {
-      const today = new Date().toISOString().split('T')[0];
-      const currentEntry = {
-          date: today,
-          name: name || "Anonymous",
-          journal,
-          sleepHours: sleepHours || 0,
-          moods,
-          imageUrl: '' // Image handling can be done later
-      };
-
-      // Find if today's entry already exists
-      const currentEntryIndex = userEntries.findIndex(entry => entry.date === today);
-      if (currentEntryIndex >= 0) {
-          userEntries[currentEntryIndex] = currentEntry;
-      } else {
-          userEntries.push(currentEntry);
-      }
-
-      computeAndDisplayStats();
-  }
-
-  // Compute average sleep and mood counts
-  function computeAndDisplayStats() {
-      let totalSleep = 0;
-      let totalEntries = userEntries.length;
-
-      // Reset mood counts
-      for (let mood in moodCounts) {
-          moodCounts[mood] = 0;
-      }
-
-      userEntries.forEach(entry => {
-          totalSleep += entry.sleepHours;
-          entry.moods.forEach(mood => {
-              if (moodCounts[mood] !== undefined) {
-                  moodCounts[mood]++;
-              }
-          });
-      });
-
-      // Calculate average sleep
-      averageSleep = totalSleep / totalEntries;
-
-      // Determine sleep SVG color
-      sleepColor = averageSleep >= 7 ? "green" : averageSleep >= 4 ? "yellow" : "red";
-  }
-
-  // Handle mood checkbox changes
-  function toggleMood(mood) {
-      if (moods.includes(mood)) {
-          moods = moods.filter(m => m !== mood);
-      } else {
-          moods = [...moods, mood];
-      }
-  }
-
-  // Display date and time
-  let currentDate = "";
-  function updateDateTime() {
-      currentDate = new Date().toLocaleString();
-  }
-</script>
-
-<style>
-  /* Add your styles here */
-  :root {
-      font-family: Arial, sans-serif;
-  }
-
-  .section {
-      margin-bottom: 20px;
-  }
-
-  input, textarea {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding: 8px;
-      font-size: 16px;
-  }
-
-  label {
-      font-weight: bold;
-  }
-
-  .mood-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-  }
-
-  .mood-checkboxes label {
-      margin-right: 15px;
-  }
-
-  svg {
-      margin-top: 10px;
-  }
-</style>
-
-<main>
-  <h1>Daily Journal</h1>
-  <p>{currentDate}</p>
-
-  <!-- Name Entry -->
-  <div class="section">
-      <label for="name">Name:</label>
-      <input type="text" bind:value={name} placeholder="Enter your name">
-  </div>
-
-  <!-- Inspirational Quote -->
-  <div class="section">
-      <blockquote>"Believe you can and you're halfway there." - Theodore Roosevelt</blockquote>
-  </div>
-
-  <!-- Image Upload -->
-  <div class="section">
-      <label for="image-upload">Upload your image:</label>
-      <input type="file" id="image-upload"> <!-- Image uploading not yet implemented -->
-  </div>
-
-  <!-- Journal Entry -->
-  <div class="section">
-      <label for="journal-entry">Journal Entry:</label>
-      <textarea bind:value={journal} rows="5" placeholder="Write your thoughts here..."></textarea>
-  </div>
-
-  <!-- Sleep Hours -->
-  <div class="section">
-      <label for="sleep-hours">Hours of Sleep:</label>
-      <input type="number" bind:value={sleepHours} min="0" max="24">
-
-      <!-- SVG for Sleep Score -->
-      <svg width="100" height="100">
-          <circle cx="50" cy="50" r="40" stroke="black" stroke-width="2" fill={sleepColor}></circle>
-      </svg>
-  </div>
-
-  <!-- Mood Checkboxes -->
-  <div class="section mood-checkboxes">
-      <p>How did you feel today?</p>
-      <label><input type="checkbox" on:change={() => toggleMood('energetic')}> Energetic</label>
-      <label><input type="checkbox" on:change={() => toggleMood('anxious')}> Anxious</label>
-      <label><input type="checkbox" on:change={() => toggleMood('motivated')}> Motivated</label>
-      <label><input type="checkbox" on:change={() => toggleMood('happy')}> Happy</label>
-      <label><input type="checkbox" on:change={() => toggleMood('stressed')}> Stressed</label>
-      <label><input type="checkbox" on:change={() => toggleMood('tired')}> Tired</label>
-  </div>
-
-  <!-- Submit Button -->
-  <div class="section">
-      <button on:click={updateCurrentDayEntry}>Save Entry</button>
-  </div>
-
-  <!-- Statistics Section -->
-  <div class="section">
-      <h2>Statistics</h2>
-      <p>Average Sleep: {averageSleep.toFixed(2)} hours</p>
-      <h3>Mood Counts</h3>
-      <div>
-          {#each Object.keys(moodCounts) as mood}
-              <p>{mood}: {moodCounts[mood]} day(s)</p>
-          {/each}
+    import { onMount } from "svelte";
+  
+    let userEntries = [
+        {
+            date: '2024-09-01',
+            workoutName: 'Chest Day',
+            exercises: [
+                { name: 'Bench Press', sets: [{ weight: 100, reps: 10 }, { weight: 105, reps: 8 }] }
+            ],
+            oneRepMax: 135,
+        },
+        {
+            date: '2024-09-02',
+            workoutName: 'Leg Day',
+            exercises: [
+                { name: 'Squat', sets: [{ weight: 150, reps: 12 }, { weight: 160, reps: 10 }] }
+            ],
+            oneRepMax: 200,
+        }
+    ];
+  
+    let workoutName = '';
+    let currentExerciseName = '';
+    let currentWeight = 0;
+    let currentReps = 0;
+    let exercises = [];
+    let oneRepMax = 0;
+  
+    // Display date and time
+    let currentDate = "";
+    function updateDateTime() {
+        currentDate = new Date().toLocaleString();
+    }
+  
+    function addExercise() {
+        exercises.push({
+            name: currentExerciseName,
+            sets: [{ weight: currentWeight, reps: currentReps }]
+        });
+        currentExerciseName = '';
+        currentWeight = 0;
+        currentReps = 0;
+    }
+  
+    function addSet(index) {
+        exercises[index].sets.push({ weight: currentWeight, reps: currentReps });
+        currentWeight = 0;
+        currentReps = 0;
+    }
+  
+    function updateCurrentDayEntry() {
+        const today = new Date().toISOString().split('T')[0];
+        const currentEntry = {
+            date: today,
+            workoutName,
+            exercises,
+            oneRepMax: calculateOneRepMax()
+        };
+  
+        const currentEntryIndex = userEntries.findIndex(entry => entry.date === today);
+        if (currentEntryIndex >= 0) {
+            userEntries[currentEntryIndex] = currentEntry;
+        } else {
+            userEntries.push(currentEntry);
+        }
+  
+        workoutName = '';
+        exercises = [];
+        oneRepMax = 0;
+    }
+  
+    // Estimate one-rep max using the Epley formula
+    function calculateOneRepMax() {
+        let max = 0;
+        exercises.forEach(exercise => {
+            exercise.sets.forEach(set => {
+                let estimatedMax = set.weight * (1 + set.reps / 30);
+                if (estimatedMax > max) max = estimatedMax;
+            });
+        });
+        return Math.round(max);
+    }
+  
+    onMount(() => {
+        updateDateTime();
+    });
+  </script>
+  
+  <style>
+    :root {
+        font-family: Arial, sans-serif;
+    }
+  
+    .container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+  
+    .column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+  
+    .middle-column {
+        flex: 2;
+    }
+  
+    input, textarea {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 8px;
+        font-size: 16px;
+    }
+  
+    label {
+        font-weight: bold;
+    }
+  
+    button {
+        margin-top: 10px;
+        padding: 10px;
+    }
+  </style>
+  
+  <main>
+    <h1>Workout Tracker</h1>
+    <p>{currentDate}</p>
+  
+    <div class="container">
+      <!-- Left column: Workout Stats -->
+      <div class="column">
+        <h2>Statistics</h2>
+        <p>Estimated One-Rep Max: {calculateOneRepMax()} lbs</p>
+        <p>Workouts Completed: {userEntries.length}</p>
       </div>
-  </div>
-</main>
+  
+      <!-- Middle column: Current Workout -->
+      <div class="column middle-column">
+        <h2>Today's Workout</h2>
+  
+        <!-- Workout Name -->
+        <div class="section">
+          <label for="workout-name">Workout Name:</label>
+          <input type="text" bind:value={workoutName} placeholder="E.g., Leg Day">
+        </div>
+  
+        <!-- Add Exercise -->
+        <div class="section">
+          <label for="exercise-name">Exercise Name:</label>
+          <input type="text" bind:value={currentExerciseName} placeholder="E.g., Bench Press">
+          <label for="weight">Weight:</label>
+          <input type="number" bind:value={currentWeight} placeholder="Weight (lbs)">
+          <label for="reps">Reps:</label>
+          <input type="number" bind:value={currentReps} placeholder="Reps">
+          <button on:click={addExercise}>Add Exercise</button>
+        </div>
+  
+        <!-- Display Exercises and Sets -->
+        <div>
+          <h3>Exercises</h3>
+          {#each exercises as exercise, i}
+            <div>
+              <h4>{exercise.name}</h4>
+              {#each exercise.sets as set, j}
+                <p>Set {j + 1}: {set.weight} lbs x {set.reps} reps</p>
+              {/each}
+              <label for="weight">Weight:</label>
+              <input type="number" bind:value={currentWeight} placeholder="Weight (lbs)">
+              <label for="reps">Reps:</label>
+              <input type="number" bind:value={currentReps} placeholder="Reps">
+              <button on:click={() => addSet(i)}>Add Set</button>
+            </div>
+          {/each}
+        </div>
+  
+        <!-- Submit Workout -->
+        <button on:click={updateCurrentDayEntry}>Save Workout</button>
+      </div>
+  
+      <!-- Right column: Previous Entries -->
+      <div class="column">
+        <h2>Previous Workouts</h2>
+        {#each userEntries as entry}
+          <div>
+            <h4>{entry.date} - {entry.workoutName}</h4>
+            {#each entry.exercises as exercise}
+              <p>{exercise.name}</p>
+              {#each exercise.sets as set}
+                <p>{set.weight} lbs x {set.reps} reps</p>
+              {/each}
+            {/each}
+          </div>
+        {/each}
+      </div>
+    </div>
+  </main>
+  
