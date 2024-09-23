@@ -1,32 +1,31 @@
 <script>
-    export let previousEntries = [];
+  import { createEventDispatcher } from 'svelte';
+  import Calendar from './Calendar.svelte';
+  import WorkoutDisplay from './WorkoutDisplay.svelte';
+
+  export let previousEntries = [];
+  export let currentWorkoutStore;
+
+  const dispatch = createEventDispatcher();
+
+  function handleWorkoutSelected(event) {
+    console.log('Selected workout:', event.detail);  
+    dispatch('workoutSelected', event.detail);
+  }
 </script>
 
 <div class="right-column">
-    <h2>Previous Workouts</h2>
-    <ul>
-      {#each previousEntries as entry}
-        <li>{entry.date}: {entry.name}</li>
-      {/each}
-    </ul>
+  <h2>Previous Workouts</h2>
+  <Calendar {previousEntries} on:workoutSelected={handleWorkoutSelected} />
+  <WorkoutDisplay workout={$currentWorkoutStore} />
 </div>
 
 <style>
-    .right-column {
-      padding: 20px;
-      background-color: #555;
-      color: white;
-      height: 100%;
-      width: 25%;
-    }
-  
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      margin: 5px 0;
-    }
+  .right-column {
+    padding: 20px;
+    background-color: #555;
+    color: white;
+    height: 100%;
+    width: 25%;
+  }
 </style>

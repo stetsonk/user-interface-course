@@ -12,5 +12,10 @@
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
     "svelte": "^4.2.18",
     "vite": "^5.4.1"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.4",
+    "fs": "^0.0.1-security",
+    "svelte-calendar": "^3.1.6"
   }
 }
