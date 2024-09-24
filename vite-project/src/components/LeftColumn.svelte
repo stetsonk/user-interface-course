@@ -4,7 +4,7 @@
   import GoalTracker from './GoalTracker.svelte';
   import OneRepMaxGraph from './OneRepMaxGraph.svelte';
 
-  let selectedExercise = 'Squat'; // Default to Squat as per our dummy data
+  let selectedExercise = 'Squat'; // Default to Squat as per dummy data
   let workoutEntries = []; 
   export let previousEntries = [];
   $: console.log('LeftColumn received previousEntries:', previousEntries);
