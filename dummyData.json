@@ -1,0 +1,124 @@
+{
+    "previousEntries": [
+      {
+        "id": 1,
+        "name": "Leg Day",
+        "date": "2024-09-01",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 135 },
+              { "reps": 5, "weight": 135 },
+              { "reps": 5, "weight": 135 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Leg Day",
+        "date": "2024-09-04",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 140 },
+              { "reps": 5, "weight": 140 },
+              { "reps": 5, "weight": 140 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Leg Day",
+        "date": "2024-09-07",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 145 },
+              { "reps": 5, "weight": 145 },
+              { "reps": 5, "weight": 145 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Leg Day",
+        "date": "2024-09-10",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 150 },
+              { "reps": 5, "weight": 150 },
+              { "reps": 5, "weight": 150 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Leg Day",
+        "date": "2024-09-13",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 155 },
+              { "reps": 5, "weight": 155 },
+              { "reps": 5, "weight": 155 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Leg Day",
+        "date": "2024-09-16",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 160 },
+              { "reps": 5, "weight": 160 },
+              { "reps": 5, "weight": 160 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Leg Day",
+        "date": "2024-09-19",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 165 },
+              { "reps": 5, "weight": 165 },
+              { "reps": 5, "weight": 165 }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Leg Day",
+        "date": "2024-09-22",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets": [
+              { "reps": 5, "weight": 170 },
+              { "reps": 5, "weight": 170 },
+              { "reps": 5, "weight": 170 }
+            ]
+          }
+        ]
+      }
+    ]
+  }
