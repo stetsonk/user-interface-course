@@ -21,11 +21,15 @@
 </div>
 
 <style>
-  .right-column {
-    padding: 20px;
-    background-color: #555;
-    color: white;
-    height: 100%;
-    width: 25%;
-  }
+    .right-column {
+        padding: 20px;
+        background-color: #333;
+        color: white;
+        height: 100%;
+        width: 25%;
+    }
+    h2 {
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
 </style>

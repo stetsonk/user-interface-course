@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
 
   export let exercise;
+  export let exerciseOptions = []; // Array of predefined exercise options
   const dispatch = createEventDispatcher();
 
   function updateExercise() {
@@ -29,12 +30,13 @@
 </script>
 
 <div class="exercise">
-  <input 
-    type="text" 
-    bind:value={exercise.name} 
-    on:input={updateExercise} 
-    placeholder="Exercise Name"
-  />
+  <select bind:value={exercise.name} on:change={updateExercise}>
+    <option value="" disabled>Select Exercise</option>
+    {#each exerciseOptions as option}
+      <option value={option}>{option}</option>
+    {/each}
+  </select>
+  
   <button on:click={removeExercise}>Delete Exercise</button>
   
   <h4>Sets</h4>
@@ -70,7 +72,7 @@
     gap: 10px;
     margin-bottom: 5px;
   }
-  input {
+  select, input {
     padding: 5px;
   }
   button {

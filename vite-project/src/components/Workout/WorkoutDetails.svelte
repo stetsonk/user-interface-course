@@ -1,6 +1,6 @@
 <script>
-    import ExerciseList from '../Exercise/ExerciseList.svelte';
-    import AddExerciseForm from '../Exercise/AddExerciseForm.svelte';
+    import ExerciseList from '../exercise/ExerciseList.svelte';
+    import AddExerciseForm from '../exercise/AddExerciseForm.svelte';
     import Button from '../Button.svelte';
     import { createEventDispatcher } from 'svelte';
   

@@ -154,4 +154,7 @@
     .highlight {
         background-color: #00d7fd;
     }
+    .highlight:hover {
+        background-color: #00b8d9;
+    }
 </style>

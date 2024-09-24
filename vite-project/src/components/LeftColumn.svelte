@@ -1,9 +1,13 @@
 <script>
   import { onMount } from 'svelte';
+  import WorkoutStats from './WorkoutStats.svelte';
+  import GoalTracker from './GoalTracker.svelte';
   import OneRepMaxGraph from './OneRepMaxGraph.svelte';
 
   let selectedExercise = 'Squat'; // Default to Squat as per our dummy data
   let workoutEntries = []; 
+  export let previousEntries = [];
+  $: console.log('LeftColumn received previousEntries:', previousEntries);
 
   onMount(async () => {
     try {
@@ -18,11 +22,9 @@
 
 <div class="left-column">
   <h2>Workout Statistics</h2>
-  {#if workoutEntries.length > 0}
-    <OneRepMaxGraph {workoutEntries} />
-  {:else}
-    <p>Loading workout data...</p>
-  {/if}
+  <WorkoutStats workouts={workoutEntries}/>
+  <GoalTracker workouts={previousEntries} />
+  <OneRepMaxGraph {previousEntries} />
 </div>
 
 <style>

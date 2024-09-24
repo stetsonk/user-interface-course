@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  import Exercise from '../Exercise/Exercise.svelte'; // Assuming you have this component
+  import Exercise from '../exercise/Exercise.svelte'; // Assuming you have this component
 
   export let workout = null;
   
@@ -65,6 +65,12 @@
     };
     dispatch('workoutSaved', savedWorkout);
   }
+
+  function deleteWorkout() {
+    if (confirm('Are you sure you want to delete this workout?')) {
+      dispatch('workoutDeleted', workout);
+    }
+  }
 </script>
 
 <div class="workout">
@@ -85,7 +91,8 @@
     <h3>Exercises</h3>
     {#each exercises as exercise, index (index)}
       <Exercise 
-        {exercise} 
+        exercise={exercise}
+        exerciseOptions={['Squat', 'Bench Press', 'Deadlift', 'Overhead Press']}
         on:update={(e) => updateExercise(index, e.detail)}
         on:remove={() => removeExercise(index)}
       />
@@ -93,6 +100,7 @@
     
     <button on:click={addExercise}>Add Exercise</button>
     <button on:click={saveWorkout}>Save Workout</button>
+    <button on:click={deleteWorkout} class="delete-button">Delete Workout</button>
   {:else}
     <p>No workout selected. Please select a workout from the calendar or start a new one.</p>
   {/if}
@@ -121,5 +129,11 @@
   }
   button:hover {
     background-color: #666;
+  }
+  .delete-button {
+    background-color: #ff4136;
+  }
+  .delete-button:hover {
+    background-color: #ff7166;
   }
 </style>

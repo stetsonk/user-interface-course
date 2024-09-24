@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import Workout from './Workout/Workout.svelte';
+    import Workout from './workout/Workout.svelte';
   
     export let workout = null;
     const dispatch = createEventDispatcher();
@@ -11,6 +11,10 @@
   
     function handleWorkoutSaved(event) {
       dispatch('workoutSaved', event.detail);
+    }
+
+    function handleWorkoutDeleted(event) {
+      dispatch('workoutDeleted', event.detail);
     }
   
     function startNewWorkout() {
@@ -24,12 +28,14 @@
         {workout} 
         on:workoutUpdated={handleWorkoutUpdated}
         on:workoutSaved={handleWorkoutSaved}
+        on:workoutDeleted={handleWorkoutDeleted}
       />
     {:else}
-      <div class="no-workout">
-        <p>No workout selected. Please select a workout from the calendar or start a new one.</p>
-        <button on:click={startNewWorkout}>Start New Workout</button>
-      </div>
+    <div class="new-workout-menu">
+      <h2>Start a New Workout</h2>
+      <p>Click the button below to begin a new workout session.</p>
+      <button on:click={startNewWorkout}>Start New Workout</button>
+    </div>
     {/if}
   </div>
   
